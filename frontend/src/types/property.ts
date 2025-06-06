@@ -32,6 +32,8 @@ export interface Property {
 export interface PropertySearchFilters {
   country?: string;
   city?: string;
+  area?: string;
+  zipCode?: string;
   transactionType?: string;
   minPrice?: string;
   maxPrice?: string;

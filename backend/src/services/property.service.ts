@@ -25,10 +25,10 @@ export class PropertyService {
         id: '1',
         source: 'test',
         country: 'Mexico',
-        state_province: 'Quintana Roo',
-        city: 'Cancun',
-        neighborhood: 'Centro',
-        postal_code: '77500',
+        state_province: 'CDMX',
+        city: 'Mexico City',
+        neighborhood: 'Polanco',
+        postal_code: '11560',
         address: '123 Main St',
         coordinates: { lat: 21.1619, lng: -86.8515 },
         transaction_type: 'sale',
@@ -68,6 +68,30 @@ export class PropertyService {
         contact_info: 'contact@example.com',
         listing_date: new Date().toISOString(),
         last_updated: new Date().toISOString()
+      },
+      {
+        id: '3',
+        source: 'test',
+        country: 'Mexico',
+        state_province: 'CDMX',
+        city: 'Mexico City',
+        neighborhood: 'Roma Norte',
+        postal_code: '06700',
+        address: '789 Calle Orizaba',
+        coordinates: { lat: 19.4173, lng: -99.1602 },
+        transaction_type: 'rent',
+        price: { amount: 1500, currency: 'USD' },
+        property_type: 'apartment',
+        bedrooms: 1,
+        bathrooms: 1,
+        area_sqm: 75,
+        lot_size_sqm: 0,
+        amenities: ['wifi', 'furnished'],
+        images: ['/placeholder-property.svg'],
+        description: 'Modern apartment in trendy Roma Norte',
+        contact_info: 'contact@example.com',
+        listing_date: new Date().toISOString(),
+        last_updated: new Date().toISOString()
       }
     ];
   }
@@ -101,6 +125,12 @@ export class PropertyService {
       if (filters.minBathrooms) {
         properties = properties.filter(p => p.bathrooms >= parseInt(filters.minBathrooms));
       }
+      if (filters.area) {
+        properties = properties.filter(p => p.neighborhood?.toLowerCase().includes(filters.area.toLowerCase()));
+      }
+      if (filters.zipCode) {
+        properties = properties.filter(p => p.postal_code === filters.zipCode);
+      }
       
       return properties;
     }
@@ -115,6 +145,8 @@ export class PropertyService {
       AND ($6::text IS NULL OR property_type = $6)
       AND ($7::int IS NULL OR bedrooms >= $7)
       AND ($8::int IS NULL OR bathrooms >= $8)
+      AND ($9::text IS NULL OR LOWER(neighborhood) LIKE LOWER('%' || $9 || '%'))
+      AND ($10::text IS NULL OR postal_code = $10)
       LIMIT 50
     `;
 
@@ -127,6 +159,8 @@ export class PropertyService {
       filters.propertyType,
       filters.minBedrooms,
       filters.minBathrooms,
+      filters.area,
+      filters.zipCode,
     ];
 
     const result = await this.pool!.query(query, values);

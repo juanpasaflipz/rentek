@@ -25,10 +25,28 @@ const propertyTypes = [
   'land',
 ];
 
+// Popular areas in Mexico City
+const mexicoCityAreas = [
+  'Polanco',
+  'Lomas de Chapultepec',
+  'La Condesa',
+  'Roma Norte',
+  'Roma Sur',
+  'Coyoacán',
+  'San Ángel',
+  'Del Valle',
+  'Nápoles',
+  'Santa Fe',
+  'Satélite',
+  'Interlomas',
+];
+
 export default function PropertySearch({ onSearch }: PropertySearchProps) {
   const [filters, setFilters] = useState({
     country: '',
     city: '',
+    area: '',
+    zipCode: '',
     transactionType: '',
     minPrice: '',
     maxPrice: '',
@@ -76,6 +94,35 @@ export default function PropertySearch({ onSearch }: PropertySearchProps) {
             onChange={handleChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             placeholder="Enter city"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Area/Neighborhood</label>
+          <select
+            name="area"
+            value={filters.area}
+            onChange={handleChange}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          >
+            <option value="">Select Area</option>
+            {mexicoCityAreas.map(area => (
+              <option key={area} value={area}>{area}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700">ZIP Code</label>
+          <input
+            type="text"
+            name="zipCode"
+            value={filters.zipCode}
+            onChange={handleChange}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            placeholder="Enter ZIP code"
+            pattern="[0-9]{5}"
+            title="Please enter a 5-digit ZIP code"
           />
         </div>
 

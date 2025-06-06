@@ -2,6 +2,7 @@
 
 import { MockProperty } from '@/types/mockProperty';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 interface PropertyListProps {
   properties: MockProperty[];
@@ -9,6 +10,7 @@ interface PropertyListProps {
 }
 
 export default function PropertyList({ properties, loading }: PropertyListProps) {
+  const router = useRouter();
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -69,7 +71,7 @@ export default function PropertyList({ properties, loading }: PropertyListProps)
             </div>
             <button
               className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              onClick={() => window.open(`/property/${property.id}`, '_blank')}
+              onClick={() => router.push(`/property/${property.id}`)}
             >
               View Details
             </button>
