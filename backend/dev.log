@@ -1,0 +1,9 @@
+
+> backend@1.0.0 dev
+> ts-node-dev --respawn --transpile-only src/server.ts
+
+[INFO] 13:25:39 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.8.3)
+Server is running on port 3001
+[INFO] 13:52:16 Reinitializing TS compilation
+[INFO] 13:52:16 Restarting: /Users/juan/Desktop/VS Code/test-project/backend/tsconfig.json has been modified
+[INFO] 13:52:16 Restarting: /Users/juan/Desktop/VS Code/test-project/backend/src/server.ts has been modified
