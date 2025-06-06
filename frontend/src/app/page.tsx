@@ -6,6 +6,7 @@ import PropertyList from '@/components/PropertyList';
 import { PropertySearchFilters } from '@/types/property';
 import { MockProperty } from '@/types/mockProperty';
 import { PropertyListing, SearchResponse } from '@/types/api';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 export default function Home() {
   const [properties, setProperties] = useState<MockProperty[]>([]);
@@ -37,7 +38,7 @@ export default function Home() {
         location: listing.location.city,
         country: listing.location.country,
         transactionType: listing.transactionType,
-        image: listing.imageUrl || '/placeholder-property.jpg',
+        image: listing.imageUrl || '/placeholder-property.svg',
       }));
       setProperties(mappedProperties);
     } catch (error) {
@@ -49,7 +50,10 @@ export default function Home() {
 
   return (
     <main className="min-h-screen p-8">
-      <h1 className="text-4xl font-bold mb-8">RenTek</h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-4xl font-bold">RenTek</h1>
+        <ThemeToggle />
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         <div className="lg:col-span-1">
           <PropertySearch onSearch={handleSearch} />

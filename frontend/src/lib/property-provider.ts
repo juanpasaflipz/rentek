@@ -115,7 +115,7 @@ export class PropertyProvider {
   private normalizeMercadoLibreResponse(data: any, page: number, limit: number): SearchResponse {
     const listings: PropertyListing[] = data.results.map((item: any) => {
       // Get the best quality image available
-      let imageUrl = '/placeholder-property.jpg';
+      let imageUrl = '/placeholder-property.svg';
       
       // Try to get the highest quality image from pictures array first
       if (item.pictures && item.pictures.length > 0) {
@@ -192,7 +192,11 @@ export class PropertyProvider {
   }
 
   private normalizeEasyBrokerResponse(data: any, page: number, limit: number): SearchResponse {
-    const listings: PropertyListing[] = data.content.map((item: any) => ({
+    const listings: PropertyListing[] = data.content.map((item: any) => {
+      // Debug log for images
+      console.log('EasyBroker item images:', item.public_id, item.images);
+      
+      return {
       id: item.public_id,
       title: item.title,
       price: item.operations?.[0]?.amount || 0,
@@ -207,11 +211,11 @@ export class PropertyProvider {
       bedrooms: item.bedrooms || 0,
       bathrooms: item.bathrooms || 0,
       area: item.construction_size || item.lot_size,
-      imageUrl: item.images?.[0]?.url || '/placeholder-property.jpg',
+      imageUrl: item.images?.[0]?.url || '/placeholder-property.svg',
       listingUrl: item.public_url || `https://www.easybroker.com/properties/${item.public_id}`,
       description: item.description,
       publishedAt: item.created_at,
-    }));
+    }});
 
     return {
       listings,
@@ -285,7 +289,7 @@ export class PropertyProvider {
         bedrooms: Math.max(filters.minBedrooms || 1, bedroomBase),
         bathrooms: Math.max(filters.minBathrooms || 1, bathroomBase),
         area: areaBase,
-        imageUrl: '/placeholder-property.jpg',
+        imageUrl: '/placeholder-property.svg',
         listingUrl: `https://example.com/property-${i}`,
         description: 'A wonderful property in a great location',
       });

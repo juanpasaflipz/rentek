@@ -35,13 +35,13 @@ export default function PropertyList({ properties, loading }: PropertyListProps)
         >
           <div className="relative h-48">
             <Image
-              src={property.image || '/placeholder-property.jpg'}
+              src={property.image || '/placeholder-property.svg'}
               alt={property.title}
               fill
               className="object-cover"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
-                target.src = '/placeholder-property.jpg';
+                target.src = '/placeholder-property.svg';
               }}
               unoptimized={property.image?.includes('mlstatic.com')}
             />
