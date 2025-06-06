@@ -29,7 +29,7 @@ export class PropertyController {
         bedrooms: property.bedrooms,
         bathrooms: property.bathrooms,
         area: property.area_sqm,
-        imageUrl: property.images[0] || '/placeholder-property.jpg',
+        imageUrl: property.images[0] || '/placeholder-property.svg',
         listingUrl: '#',
         description: property.description,
         publishedAt: property.listing_date,

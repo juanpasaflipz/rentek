@@ -39,7 +39,7 @@ export class PropertyService {
         area_sqm: 120,
         lot_size_sqm: 0,
         amenities: ['pool', 'gym', 'parking'],
-        images: ['/placeholder-property.jpg'],
+        images: ['/placeholder-property.svg'],
         description: 'Beautiful apartment in Cancun',
         contact_info: 'contact@example.com',
         listing_date: new Date().toISOString(),
