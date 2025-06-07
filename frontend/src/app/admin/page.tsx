@@ -42,21 +42,21 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     fetchData();
-  }, [activeTab, timeRange]);
+  }, [activeTab, timeRange]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchData = async () => {
     setLoading(true);
     try {
       if (activeTab === 'logs') {
-        const response = await fetch('/api/admin/api-logs?limit=50');
+        const response = await fetch('http://localhost:3001/api/admin/api-logs?limit=50');
         const data = await response.json();
         setLogs(data.logs || []);
       } else if (activeTab === 'stats') {
-        const response = await fetch(`/api/admin/api-stats?timeRange=${timeRange}`);
+        const response = await fetch(`http://localhost:3001/api/admin/api-stats?timeRange=${timeRange}`);
         const data = await response.json();
         setStats(data.stats || []);
       } else if (activeTab === 'providers') {
-        const response = await fetch('/api/admin/api-providers');
+        const response = await fetch('http://localhost:3001/api/admin/api-providers');
         const data = await response.json();
         setProviders(data.providers || []);
       }
@@ -69,7 +69,7 @@ export default function AdminDashboard() {
 
   const updateProvider = async (id: number, updates: Partial<ApiProvider>) => {
     try {
-      const response = await fetch(`/api/admin/api-providers/${id}`, {
+      const response = await fetch(`http://localhost:3001/api/admin/api-providers/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -146,7 +146,7 @@ export default function AdminDashboard() {
                 <div className="mb-4">
                   <select
                     value={timeRange}
-                    onChange={(e) => setTimeRange(e.target.value as any)}
+                    onChange={(e) => setTimeRange(e.target.value as 'hour' | 'day' | 'week' | 'month')}
                     className="px-4 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-600"
                   >
                     <option value="hour">Last Hour</option>

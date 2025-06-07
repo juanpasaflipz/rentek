@@ -61,3 +61,9 @@
    Reload env: .env.local
    Reload env: .env.local
    Reload env: .env.local
+ ○ Compiling /_not-found/page ...
+ ✓ Compiled /_not-found/page in 1684ms
+ GET /adim 404 in 1866ms
+ ✓ Compiled /favicon.ico in 331ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 573ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 224ms
